@@ -10,7 +10,7 @@
 	int PWMA=9;     // PIN PWM MOTOR A
 	int ain2=8;
 	int ain1=7;
-	int pwmb=6;
+	int PWMB=6;     // PIN PWM MOTOR B
 	int bin2=5;
 	int bin1=4; //}
 
@@ -43,7 +43,7 @@ void setup()
   pinMode(PWMA,OUTPUT);
   pinMode(ain1,OUTPUT);
   pinMode(ain2,OUTPUT);
-  pinMode(pwmb,OUTPUT);
+  pinMode(PWMB,OUTPUT);
   pinMode(bin1,OUTPUT);
   pinMode(bin2,OUTPUT);
   
@@ -68,7 +68,7 @@ void setup()
  digitalWrite(bin2,LOW);
  
  analogWrite(PWMA,0);
- analogWrite(pwmb,0);
+ analogWrite(PWMB,0);
 }
 
 
@@ -87,19 +87,19 @@ for(;;){
  P = ((position)-(3500)); /// ERROR
 /////FRENOS////
 if(P<-3500){
- analogWrite(PWMA,120); // VELOCIDAD PARA EL MOTOR DERECHO
-  analogWrite(pwmb,180); //  VELOCIDAD PARA EL MOTOR IZQUIERDO
- digitalWrite(ain1,LOW);   ///FRENTE
+ analogWrite(PWMA,120);    // VELOCIDAD PARA EL MOTOR DERECHO
+  analogWrite(PWMB,180);   // VELOCIDAD PARA EL MOTOR IZQUIERDO
+ digitalWrite(ain1,LOW);   // FRENTE
  digitalWrite(ain2,HIGH);
- digitalWrite(bin1,LOW);  ///RETROCEDE
+ digitalWrite(bin1,LOW);   // RETROCEDE
  digitalWrite(bin2,HIGH);
 
 } else if (P>3500){
- analogWrite(PWMA,135); // VELOCIDAD PARA EL MOTOR DERECHO
- analogWrite(pwmb,90); //  VELOCIDAD PARA EL MOTOR IZQUIERDO
- digitalWrite(ain1,HIGH);   ///RETROCEDE
+ analogWrite(PWMA,135);    // VELOCIDAD PARA EL MOTOR DERECHO
+ analogWrite(PWMB,90);     // VELOCIDAD PARA EL MOTOR IZQUIERDO
+ digitalWrite(ain1,HIGH);  // RETROCEDE
  digitalWrite(ain2,LOW);
- digitalWrite(bin1,HIGH);  ///FRENTE
+ digitalWrite(bin1,HIGH);  // FRENTE
  digitalWrite(bin2,LOW);
 
 }
@@ -121,7 +121,7 @@ vel=(P*0.045)+(D*0.07)+(I*0.00065);// para velocidad 120//////estaba en 0.0925
     if(vel<-cruzero) vel=-cruzero;
 
   analogWrite(PWMA,cruzero-vel); // VELOCIDAD PARA EL MOTOR DERECHO
-  analogWrite(pwmb,cruzero+vel); //  VELOCIDAD PARA EL MOTOR IZQUIERDO
+  analogWrite(PWMB,cruzero+vel); //  VELOCIDAD PARA EL MOTOR IZQUIERDO
 
  digitalWrite(ain1,LOW);   ///FRENTE
  digitalWrite(ain2,HIGH);
