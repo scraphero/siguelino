@@ -1,135 +1,372 @@
-#include <QTRSensors.h>
+#include "values.h"
 
-//DECLARACION DE ENTRADAS
+// PINS
+  // MOTORS
+    const int left__forward = 3;         //Salida pwm motor 1a DERECHO
+    const int left__backward = 9;         //Salida pwm motor 1b DERECHO
+    const int right_forward = 10;         //Salida pwm motor 2a IZQUIERDO
+    const int right_backward = 5;         //Salida pwm motor 2b IZQUIERDO
+  // PUSH BUTTON
+    const int pin_pulsador = 12 ;
+    //
 
-//{BOTONES
-	const int btn1=19;
-	const int btn2=4; //}
+int estadoboton;
 
-//{ PINES
-	int PWMA=9;     // PIN PWM MOTOR A
-	int ain2=8;
-	int ain1=7;
-	int PWMB=6;     // PIN PWM MOTOR B
-	int bin2=5;
-	int bin1=4; //}
+const int limite = 2000;     //LE DAMOS NOMBRE AL LIMITE PARA SEPARAR ETRE MAXIMO Y MINIMO
 
-int cruzero = 80; // VELOCIDAD REFERENCIA
+const int low = 0;
+const int high = 1;
+
+int sens1;              //LE DAMOS NOMBRE A CADA ENTRADA DE SENSOR 8 ENTRADAS DIGITALES
+int sens2;
+int sens3;
+int sens4;
+int sens5;
+int sens6;
+int sens7;
+int sens8;
+
+int S1;
+int S2;
+int S3;
+int S4;
+int S5;
+int S6;
+int S7;
+int S8;
+                  
+   
 
 
-
-int P=0;          // ERROR
-int I=0;          // INTEGRAL
-int D=0;          // DERIVATIVO
-int LAST=0;
-float vel;
-
-#define NUM_SENSORS   8      // number of sensors used
-#define TIMEOUT       2500   // waits for 2500 microseconds for sensor outputs to go low
-#define EMITTER_PIN   20     // emitter is controlled by digital pin 2
-
-// sensors 0 through 7 are connected to digital pins 3 through 10, respectively
-QTRSensorsRC qtrrc((unsigned char[]) {17, 16, 15, 14, 13, 12, 11, 10},
-  NUM_SENSORS, TIMEOUT, EMITTER_PIN); 
-unsigned int sensorValues[NUM_SENSORS];
-
-unsigned int position=0;
-
-void setup()
-{
-
-  pinMode(btn1, INPUT);
+     
+// SETUP
+  void setup() {
+    //Serial.begin(9600);                 // DEBUG
+    //void values();
+                                 //  OUTPUTS
+                                 
+    pinMode(left__forward, OUTPUT);       //PWM MOTOR 1 DERECHO
+    pinMode(right_forward, OUTPUT);        //PWM MOTOR 2 IZQUIERDO
+    pinMode(left__backward, OUTPUT);       //PWM MOTOR 1 DERECHO
+    pinMode(right_backward, OUTPUT);       //PWM MOTOR 2 IZQUIERDO
     
-  pinMode(PWMA,OUTPUT);
-  pinMode(ain1,OUTPUT);
-  pinMode(ain2,OUTPUT);
-  pinMode(PWMB,OUTPUT);
-  pinMode(bin1,OUTPUT);
-  pinMode(bin2,OUTPUT);
-  
-  pinMode(18,OUTPUT);
-
-//Serial.begin(9600); // set the data rate in bits per second for serial data transmission
-  delay(1500);
-  digitalWrite(18, HIGH);
-   for (int j = 0; j < 40; j++)  
- {                                 
-                    
-  qtrrc.calibrate();       
-
- }
- 
-  digitalWrite(18, LOW); 
-                                                                   
- digitalWrite(ain1,LOW);
- digitalWrite(ain2,HIGH);
- 
- digitalWrite(bin1,HIGH);
- digitalWrite(bin2,LOW);
- 
- analogWrite(PWMA,0);
- analogWrite(PWMB,0);
-}
-
-
-void loop()
-{
-  
-  if (digitalRead(btn1)==1){
-
-for(;;){ 
-
-  qtrrc.read(sensorValues);
-
-     position = qtrrc.readLine(sensorValues, QTR_EMITTERS_ON, 0);
-                                             
-                                                                                        
- P = ((position)-(3500)); /// ERROR
-/////FRENOS////
-if(P<-3500){
- analogWrite(PWMA,120);    // VELOCIDAD PARA EL MOTOR DERECHO
-  analogWrite(PWMB,180);   // VELOCIDAD PARA EL MOTOR IZQUIERDO
- digitalWrite(ain1,LOW);   // FRENTE
- digitalWrite(ain2,HIGH);
- digitalWrite(bin1,LOW);   // RETROCEDE
- digitalWrite(bin2,HIGH);
-
-} else if (P>3500){
- analogWrite(PWMA,135);    // VELOCIDAD PARA EL MOTOR DERECHO
- analogWrite(PWMB,90);     // VELOCIDAD PARA EL MOTOR IZQUIERDO
- digitalWrite(ain1,HIGH);  // RETROCEDE
- digitalWrite(ain2,LOW);
- digitalWrite(bin1,HIGH);  // FRENTE
- digitalWrite(bin2,LOW);
-
-}
-/////////////////////////
-  else{
- D= (P - LAST); /// ERROR MENOS EL ERROR ANTERIOR , DERIVATIVO
-   I=(P+ LAST); //INTEGRAL
-   
-   
-//vel=(P*0.025)+(D*0.095)+(I*0); // PID
-   
-vel=(P*0.045)+(D*0.07)+(I*0.00065);// para velocidad 120//////estaba en 0.0925
-
-//vel=(P*0.0428)+(D*0.085)+(I*0); //para velocidad 80 kd=0.06
-
-///CRUZERO =VELOCIDAD PUNTA , V
-
-    if(vel >cruzero) vel=cruzero;
-    if(vel<-cruzero) vel=-cruzero;
-
-  analogWrite(PWMA,cruzero-vel); // VELOCIDAD PARA EL MOTOR DERECHO
-  analogWrite(PWMB,cruzero+vel); //  VELOCIDAD PARA EL MOTOR IZQUIERDO
-
- digitalWrite(ain1,LOW);   ///FRENTE
- digitalWrite(ain2,HIGH);
- digitalWrite(bin1,HIGH);  ///FRENTE
- digitalWrite(bin2,LOW);
- 
-LAST=P;
+    digitalWrite(pin_pulsador, HIGH);
+    
   }
-}////BUCLE INFINITO
-}///PRESIONO BOTON
-}///FIN DEL LOOP
+
+// LOOP
+  void loop() {
+      //Serial.println("you are here");  // DEBUG
+
+      estadoboton = digitalRead(pin_pulsador);
+      while(estadoboton == HIGH){
+
+        digitalWrite(left__forward, LOW);     
+        digitalWrite(right_forward, LOW);
+        digitalWrite(left__backward, LOW);     
+        digitalWrite(right_backward, LOW);
+
+        estadoboton = digitalRead(pin_pulsador);
+      
+
+      while(estadoboton == LOW){
+
+          delay(1250);
+      while(estadoboton == LOW){
+
+            
+          
+          
+        
+      
+
+
+    
+    S1 = analogRead(0); //LES DAMOS NOMBRE A LOS PINES POR LOS QUE LEE A CADA SENSOR
+    S2 = analogRead(1);
+    S3 = analogRead(2);
+    S4 = analogRead(3);
+    S5 = analogRead(4);
+    S6 = analogRead(5);
+    S7 = analogRead(6);
+    S8 = analogRead(7);  
+
+
+
+
+  //LES DAMOS VALOR DE ALTO O BAJO A LAS ENTRADAS ANALOGICAS
+
+
+    if(S1 > limite){
+      sens1 = high;
+    }
+    else{
+      sens1 = low;
+    }
+
+    if(S2 > limite){
+      sens2 = high;
+    }
+    else{
+      sens2 = low;
+    }
+
+    if(S3 > limite){
+      sens3 = high;
+    }
+    else{
+      sens3 = low;
+    }
+
+    if(S4 > limite){
+      sens4 = high;
+    }
+    else{
+      sens4 = low;
+    }
+
+    if(S5 > limite){
+      sens5 = high;
+    }
+    else{
+      sens5 = low;
+    }
+
+    if(S6 > limite){
+      sens6 = high;
+    }
+    else{
+      sens6 = low;
+    }
+
+    if(S7 > limite){
+      sens7 = high;
+    }
+    else{
+      sens7 = low;
+    }
+
+    if(S8 > limite){
+      sens8 = high;
+    }
+    else{
+      sens8 = low;
+    }
+
+
+    
+    //PARA QUE VAYA RECTO
+
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW HIGH HIGH LOW LOW LOW      
+        
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == HIGH &&  sens5 == HIGH &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+     
+      analogWrite(left__forward, pwmR);
+      analogWrite(right_forward, pwmR);
+      analogWrite(left__backward, pwmA1b);
+      analogWrite(right_backward, pwmA2b);
+     
+   
+      
+       }
+
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW HIGH HIGH HIGH HIGH LOW LOW      
+        
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == HIGH && sens4 == HIGH &&  sens5 == HIGH &&  sens6 == HIGH &&  sens7 == LOW &&  sens8 == LOW){    
+     
+      analogWrite(left__forward, pwmR);
+      analogWrite(right_forward, pwmR); 
+      analogWrite(left__backward, pwmA1b);
+      analogWrite(right_backward, pwmA2b);  
+      
+       }
+          
+                              //SI SE SALE PARA LA DERECHA
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW HIGH HIGH HIGH LOW LOW LOW    CURVA A IZQUIERDAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == HIGH &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+       
+      analogWrite(left__forward, pwm_A_outside_wheel);
+      analogWrite(right_forward, pwm_A_inside_wheel);   
+      analogWrite(left__backward, pwmA1b);
+      analogWrite(right_backward, pwmA2b);
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW HIGH HIGH LOW LOW LOW LOW    CURVA B IZQUIERDAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == HIGH && sens4 == HIGH &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+    
+      analogWrite(left__forward, pwmB1a);
+      analogWrite(right_forward, pwmB2a);  
+      analogWrite(left__backward, pwmB1b);
+      analogWrite(right_backward, pwmB2b); 
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW HIGH HIGH HIGH LOW LOW LOW LOW    CURVA C IZQUIERDAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == HIGH && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+    
+      analogWrite(left__forward, pwmC1a);
+      analogWrite(right_forward, pwmC2a);   
+      analogWrite(left__backward, pwmC1b);
+      analogWrite(right_backward, pwmC2b);
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW HIGH HIGH LOW LOW LOW LOW LOW    CURVA D IZQUIERDAS
+
+    if (sens1 == LOW && sens2 == HIGH &&  sens3 == HIGH && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+    
+      analogWrite(left__forward, pwmD1a);
+      analogWrite(right_forward, pwmD2a);   
+      analogWrite(left__backward, pwmD1b);
+      analogWrite(right_backward, pwmD2b);
+      
+       }
+       
+  //  1   2   3    4    5   6   7   8             
+  // HIGH HIGH HIGH LOW LOW LOW LOW LOW    CURVA E IZQUIERDAS
+
+    if (sens1 == LOW && sens2 == HIGH &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+     
+      analogWrite(left__forward, pwmE1a);
+      analogWrite(right_forward, pwmE2a); 
+      analogWrite(left__backward, pwmE1b);
+      analogWrite(right_backward, pwmE2b);  
+      
+       }
+  //  1    2    3    4    5   6   7   8             
+  // HIGH HIGH HIGH HIGH LOW LOW LOW LOW    CURVA E IZQUIERDAS
+
+    if (sens1 == HIGH && sens2 == HIGH &&  sens3 == HIGH && sens4 == HIGH &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+     
+      analogWrite(left__forward, pwmE1a);
+      analogWrite(right_forward, pwmE2a);
+      analogWrite(left__backward, pwmE1b);
+      analogWrite(right_backward, pwmE2b);   
+      
+       }     
+  //  1   2   3    4    5   6   7   8             
+  // HIGH HIGH LOW LOW LOW LOW LOW LOW    CURVA F IZQUIERDAS
+
+    if (sens1 == HIGH && sens2 == HIGH &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+           
+      analogWrite(left__forward, pwmF1a);
+      analogWrite(right_forward, pwmF2a);   
+      analogWrite(left__backward, pwmF1b);
+      analogWrite(right_backward, pwmF2b);
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // HIGH LOW LOW LOW LOW LOW LOW LOW    CURVA G IZQUIERDAS
+
+    if (sens1 == HIGH && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+        
+      analogWrite(left__forward, pwmG1a);
+      analogWrite(right_forward, pwmG2a);   
+      analogWrite(left__backward, pwmG1b);
+      analogWrite(right_backward, pwmG2b);
+      
+       }
+
+                              //SI SE SALE PARA LA IZQUIERDA
+
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW HIGH HIGH HIGH LOW LOW    CURVA A DERECHAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == HIGH &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == LOW){    
+        
+      analogWrite(left__forward, pwm_A_inside_wheel);
+      analogWrite(right_forward, pwm_A_outside_wheel);   
+      analogWrite(left__backward, pwmA1b);
+      analogWrite(right_backward, pwmA2b);
+      
+       }
+
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW LOW HIGH HIGH LOW LOW    CURVA B DERECHAS 
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == HIGH &&  sens6 == HIGH &&  sens7 == LOW &&  sens8 == LOW){    
+        
+      analogWrite(left__forward, pwmB2a);
+      analogWrite(right_forward, pwmB1a);   
+      analogWrite(left__backward, pwmB2b);
+      analogWrite(right_backward, pwmB1b);
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW LOW HIGH HIGH HIGH LOW    CURVA C DERECHAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == HIGH &&  sens7 == LOW &&  sens8 == LOW){    
+        
+      analogWrite(left__forward, pwmC2a);
+      analogWrite(right_forward, pwmC1a);   
+      analogWrite(left__backward, pwmC2b);
+      analogWrite(right_backward, pwmC1b);
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW LOW LOW HIGH HIGH LOW    CURVA D DERECHAS 
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == HIGH &&  sens7 == HIGH &&  sens8 == LOW){    
+        
+      analogWrite(left__forward, pwmD2a);
+      analogWrite(right_forward, pwmD1a);   
+      analogWrite(left__backward, pwmD2b);
+      analogWrite(right_backward, pwmD1b);
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW LOW LOW HIGH HIGH HIGH    CURVA E DERECHAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == HIGH &&  sens8 == LOW){    
+        
+      analogWrite(left__forward, pwmE2a);
+      analogWrite(right_forward, pwmE1a);   
+      analogWrite(left__backward, pwmE2b);
+      analogWrite(right_backward, pwmE1b);
+      
+       }
+  //  1   2   3    4   5   6    7   8             
+  // LOW LOW LOW LOW HIGH HIGH HIGH HIGH    CURVA E DERECHAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == HIGH &&  sens6 == HIGH &&  sens7 == HIGH &&  sens8 == HIGH){    
+        
+      analogWrite(left__forward, pwmE2a);
+      analogWrite(right_forward, pwmE1a);   
+      analogWrite(left__backward, pwmE2b);
+      analogWrite(right_backward, pwmE1b);
+      
+       }
+       
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW LOW LOW LOW HIGH HIGH    CURVA F DERECHAS 
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == HIGH &&  sens8 == HIGH){    
+        
+      analogWrite(left__forward, pwmF2a);
+      analogWrite(right_forward, pwmF1a);   
+      analogWrite(left__backward, pwmF2b);
+      analogWrite(right_backward, pwmF1b);
+      
+       }
+  //  1   2   3    4    5   6   7   8             
+  // LOW LOW LOW LOW LOW LOW LOW HIGH    CURVA G DERECHAS
+
+    if (sens1 == LOW && sens2 == LOW &&  sens3 == LOW && sens4 == LOW &&  sens5 == LOW &&  sens6 == LOW &&  sens7 == LOW &&  sens8 == HIGH){    
+        
+      analogWrite(left__forward, pwmG2a);
+      analogWrite(right_forward, pwmG1a);   
+      analogWrite(left__backward, pwmG2b);
+      analogWrite(right_backward, pwmG1b);
+      
+       }
+
+          }
+          }
+  }
+  }

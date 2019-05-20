@@ -1,0 +1,333 @@
+01 
+    const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 240;
+
+    const int pwmB1 = 250;     //CURVA B
+    const int pwmB2 = 230;
+
+    const int pwmC1 = 220;      //CURVA C
+    const int pwmC2 = 190;
+
+    const int pwmD1 = 220;      //CURVA D
+    const int pwmD2 = 160;
+
+    const int pwmE1 = 220;      //CURVA E
+    const int pwmE2 = 110;
+
+    const int pwmF1 = 200;      //CURVA F
+    const int pwmF2 = 70;
+
+    const int pwmG1 = 190;      //CURVA G
+    const int pwmG2 = 20;
+
+02 
+    const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 240;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 210;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 170;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 150;
+
+    const int pwmE1 = 255;      //CURVA E
+    const int pwmE2 = 110;
+
+    const int pwmF1 = 255;      //CURVA F
+    const int pwmF2 = 70;
+
+    const int pwmG1 = 255;      //CURVA G
+    const int pwmG2 = 20;
+
+03
+    const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 255;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 240;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 220;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 180;
+
+    const int pwmE1 = 255;      //CURVA E
+    const int pwmE2 = 150;
+
+    const int pwmF1 = 255;      //CURVA F
+    const int pwmF2 = 110;
+
+    const int pwmG1 = 255;      //CURVA G
+    const int pwmG2 = 70;
+
+04
+    const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 255;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 240;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 220;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 180;
+
+    const int pwmE1 = 220;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 90;
+
+    const int pwmG1 = 220;      //CURVA G
+    const int pwmG2 = 40;
+05
+    const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 255;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 240;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 220;
+
+    const int pwmD1 = 245;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 230;      //CURVA E
+    const int pwmE2 = 110;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 75;
+
+    const int pwmG1 = 205;      //CURVA G
+    const int pwmG2 = 20;
+06
+    const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 240;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 220;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 195;
+
+    const int pwmD1 = 245;      //CURVA D
+    const int pwmD2 = 160;
+
+    const int pwmE1 = 245;      //CURVA E
+    const int pwmE2 = 110;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 60;
+
+    const int pwmG1 = 225;      //CURVA G
+    const int pwmG2 = 10;
+
+07
+     
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 230;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 210;
+
+    const int pwmD1 = 245;      //CURVA D
+    const int pwmD2 = 160;
+
+    const int pwmE1 = 245;      //CURVA E
+    const int pwmE2 = 115;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 60;
+
+    const int pwmG1 = 200;      //CURVA G
+    const int pwmG2 = 30;
+08
+    
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 240;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 225;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 205;
+
+    const int pwmD1 = 250;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 245;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 57;
+
+    const int pwmG1 = 200;      //CURVA G
+    const int pwmG2 = 30;
+
+09     recta ok
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 235;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 200;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 245;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 57;
+
+    const int pwmG1 = 200;      //CURVA G
+    const int pwmG2 = 0;
+
+10     
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 235;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 200;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 245;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 50;
+
+    const int pwmG1 = 215;      //CURVA G
+    const int pwmG2 = 20;
+
+11    
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 235;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 200;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 245;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 220;      //CURVA F
+    const int pwmF2 = 55;
+
+    const int pwmG1 = 220;      //CURVA G
+    const int pwmG2 = 20;
+12
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 235;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 200;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 255;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 235;      //CURVA F
+    const int pwmF2 = 55;
+
+    const int pwmG1 = 235;      //CURVA G
+    const int pwmG2 = 20;
+
+13 [1er premio con BOOST 13.89V]
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 235;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 200;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 255;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 235;      //CURVA F
+    const int pwmF2 = 85;
+
+    const int pwmG1 = 235;      //CURVA G
+    const int pwmG2 = 50;
+
+14 [BOOST 15.01V]
+   const int pwmR = 255;     //PWM PARA QUE VAYA RECTO
+
+    const int pwmA1 = 255;     //CURVA A
+    const int pwmA2 = 245;
+
+    const int pwmB1 = 255;     //CURVA B
+    const int pwmB2 = 235;
+
+    const int pwmC1 = 255;      //CURVA C
+    const int pwmC2 = 210;
+
+    const int pwmD1 = 255;      //CURVA D
+    const int pwmD2 = 170;
+
+    const int pwmE1 = 255;      //CURVA E
+    const int pwmE2 = 130;
+
+    const int pwmF1 = 255;      //CURVA F
+    const int pwmF2 = 100;
+
+    const int pwmG1 = 255;      //CURVA G
+    const int pwmG2 = 80;
